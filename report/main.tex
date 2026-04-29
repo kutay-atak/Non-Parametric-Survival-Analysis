@@ -15,7 +15,7 @@
 
 Survival analysis provides a framework for analyzing time-to-event data in the presence of censoring. In this study, we investigate survival outcomes of patients with nasopharyngeal cancer using nonparametric methods. The primary objective is to examine how survival differs across disease stages at diagnosis.
 
-We take on the Kaplan-Meier estimator to construct survival curves and summarize group-specific survival patterns. To complement these estimates, we report survival quantiles and restricted mean survival time (RMST), which remains well-defined under heavy censoring. Finally, we apply the log-rank test to formally assess whether survival distributions differ across stage categories.
+We take on the Kaplan-Meier estimator to construct survival curves and summarize group-specific survival patterns. To complement these estimates, we report survival quantiles and restricted mean survival time (RMST), which remains well-defined under heavy censoring. We apply the log-rank test to formally assess whether survival distributions differ across stage categories. Lastly, Cox Proportional Hazards model has been used to check assumptions.
 \section*{Nonparametric Survival Analysis}
 
 We focus on $Stage$ as the primary categorical variable, with three ordered levels: Distant, Localized, and Regional. Observations with $Unknown$ stage are excluded because they do not represent a meaningful clinical category but rather missing information.
@@ -119,6 +119,23 @@ Regional  & 422 & 140 & 204.3 & 42.64 \\
 The test resulted in a chi-square statistic of $\chi^2 = 66.4$ on 2 degrees of freedom, with a p-value of $p < 4 \times 10^{-15}$. 
 
 Since the p-value is below our threshold of 0.05, we reject the null hypothesis, and there is evidence that survival times differ significantly by stage category based on the log-rank test. Specifically, the $Distant$ group experienced around 1.5 times the number of deaths expected under the null (229 observed, 151 expected), while the $Localized$ and $Regional$ groups observed fewer deaths than expected.
+
+\subsection*{Part D: Cox Proportional Hazards Model}
+
+To quantify the effect of stage on survival, we fit a Cox proportional hazards model using the Distant stage as the reference category.
+
+The estimated hazard ratios are:
+\begin{itemize}
+    \item Localized: $\exp(-0.8625) = 0.42$
+    \item Regional: $\exp(-0.8033) = 0.45$
+\end{itemize}
+
+Both Localized and Regional stages are associated with substantially lower hazards compared to the Distant stage, corresponding to approximately 55--60\% reductions in risk. These effects are highly statistically significant ($p < 0.001$).
+
+The likelihood ratio test ($\chi^2 = 64.08$, $df = 2$, $p < 0.001$) confirms that stage at diagnosis is a strong predictor of survival.
+
+\paragraph{Proportional hazards assumption.}
+The proportional hazards assumption was assessed using Schoenfeld residuals. The test yielded a non-significant result ($p = 0.15$), indicating no evidence against the proportional hazards assumption.
 \section*{Conclusion}
 
 The analysis demonstrates clear differences in survival across stage categories. Patients diagnosed at the distant stage exhibit substantially worse survival outcomes compared to those with localized or regional disease. While median survival is only estimable for the distant group due to censoring, RMST provides a consistent summary measure and confirms the same ordering of survival across groups.
