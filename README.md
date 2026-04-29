@@ -55,6 +55,16 @@ The log-rank test yields:
 
 This provides strong evidence against the null hypothesis, indicating that survival distributions differ significantly across stage categories.
 
+## Cox Model Results
+A Cox proportional hazards model was fitted using Distant stage as the reference.
+
+- Localized: HR = 0.42  
+- Regional: HR = 0.45  
+
+Both groups show substantially lower hazard compared to Distant stage (p < 0.001).
+
+### Assumption Check
+The proportional hazards assumption was tested using Schoenfeld residuals (p = 0.15), indicating no evidence of violation.
 ---
 
 ## Project Structure
