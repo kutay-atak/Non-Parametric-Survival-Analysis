@@ -21,3 +21,10 @@ print(KM,print.rmean = T, rmean = 119)
 
 # Log-rank test to compare the three curves
 survdiff(Surv(surv_months, event) ~ stage_clean, data = dat2, rho = 0)
+
+# Cox model
+cox_model <- coxph(Surv(surv_months, event) ~ stage_clean, data = dat2)
+summary(cox_model)
+
+# Proportional hazards test
+cox.zph(cox_model)
